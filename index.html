@@ -13,8 +13,9 @@
 <body>
   <div class="container w-75">
     <div class="island mb-4">
-      <div class="island__item">
-        <h1 class="text-center">Create recipe</h1>
+      <div class="island__item d-flex justify-content-center align-items-baseline">
+        <img class="book" src="./src/images/book.svg" alt="book">
+        <h1 class="text-center ">Create recipe</h1>
       </div>
       <div class="island__item">
         <form id="form">
@@ -29,17 +30,17 @@
                 <option selected value="starter">Starter</option>
                 <option value="salad">Salad</option>
                 <option value="main-dish">Main dish</option>
-                <option value="dessert">dessert</option>
+                <option value="dessert">Dessert</option>
               </select>
             </div>
-            <div class="select-flex pl-3 d-flex">
+            <div class="select-flex d-flex">
               <div>
                 <label for="title" class="form-label">Сooking time</label>
                 <input type="text" class="form-control" id="cookingTime" name="cooking-time">
               </div>
-              <select id="typeOfTime" name="type-of-time" class="form-select ">
-                <option selected value="minutes">Minutes</option>
-                <option value="hours">Hours</option>
+              <select id="typeOfTime" name="typeTime" class="form-select ">
+                <option selected value="min">min</option>
+                <option value="hour">h</option>
               </select>
             </div>
           </div>
@@ -55,21 +56,21 @@
             <label for="author" class="form-label">Author</label>
             <input type="text" class="form-control" id="author" name="author">
           </div>
-          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="submit" class="btn btn-danger">Save</button>
         </form>
       </div>
     </div>
 
     <div class="row">
       <div class="col-3">
-        <div class="island" style="min-height: 500px" id="posts">
+        <div class="island" style="min-height: 500px" id="recipes">
 
         </div>
       </div>
 
-      <div class="col-9">
-        <div class="island" style="min-height: 500px">
-          <div class="island__item" id="post">
+      <div class="col-9 ">
+        <div class="island description" style="min-height: 500px">
+          <div class="island__item" id="recipe">
 
           </div>
         </div>

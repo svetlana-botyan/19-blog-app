@@ -7,5 +7,6 @@ Run dev 'npm run dev'
 
 Install bootstrap 'npm install bootstrap'
 Install library for bootstrap 'npm install @popperjs/core'
+Install library 'npm install nanoid'
 
 Run server 'npm run server'

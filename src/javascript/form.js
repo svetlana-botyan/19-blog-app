@@ -16,22 +16,24 @@ class Form {
   handleSubmitForm (event) {
     event.preventDefault()
 
-    const post = {
+    const recipe = {
       id: nanoid(), // Generate unique id
-      createdAt: new Date()
+      createdAt: new Date() // when create recipe
     }
+    console.log(recipe)
 
     const formData = new FormData(this.formElement)
 
     for (const [name, value] of formData.entries()) {
-      post[name] = value
+      recipe[name] = value
     }
 
-    this.sendPost(post)
+    this.sendRecipe(recipe)
     this.formElement.reset()
   }
 
-  sendPost (data) {
+  // отправка на сервер
+  sendRecipe (data) {
     const dataJson = JSON.stringify(data)
     const opts = {
       method: 'POST',
@@ -44,8 +46,9 @@ class Form {
     fetch('/api/posts', opts)
       .then((response) => response.json())
       .then((data) => {
-        const event = new Event('posts:needsRender')
-        window.dispatchEvent(event)
+        console.log('jr')
+        // const event = new Event('recipes:needsRender')
+        // window.dispatchEvent(event)
       })
   }
 }

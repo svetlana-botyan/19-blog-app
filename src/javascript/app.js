@@ -4,10 +4,10 @@ import '../scss/app.scss'
 // import { Modal } from 'bootstrap' //для модального окна
 
 import { Form } from './form'
-import { Posts } from './posts'
+// import { Recipes } from './recipes'
 
 const formElement = document.querySelector('#form')
-const postsElement = document.querySelector('#posts')
+const recipesElement = document.querySelector('#recipes')
 
 const form = new Form(formElement)
-const posts = new Posts(postsElement)
+// const recipes = new Recipes(recipesElement)

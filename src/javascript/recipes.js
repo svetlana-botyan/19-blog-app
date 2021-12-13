@@ -1,4 +1,4 @@
-class Posts {
+class Recipes {
   constructor (containerElement) {
     this.containerElement = containerElement
 
@@ -53,4 +53,4 @@ class Posts {
   }
 }
 
-export { Posts }
+export { Recipes }
