@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookbook</title>
+  <!-- app.bundle.js подключается именно так, работает благодаря настройкам сервера -->
+  <script src="./dist/app.bundle.js" defer></script>
+</head>
+
+<body>
+  <div class="container w-75">
+    <div class="island mb-4">
+      <div class="island__item">
+        <h1 class="text-center">Create recipe</h1>
+      </div>
+      <div class="island__item">
+        <form id="form">
+          <div class="mb-3">
+            <label for="title" class="form-label">Recipe name</label>
+            <input type="text" class="form-control" id="title" name="title">
+          </div>
+          <div class="mb-3 d-flex justify-content-between align-items-start">
+            <div class="select-flex flex-grow-1">
+              <p>Choose a category</p>
+              <select id="priority" name="category" class="form-select">
+                <option selected value="starter">Starter</option>
+                <option value="salad">Salad</option>
+                <option value="main-dish">Main dish</option>
+                <option value="dessert">dessert</option>
+              </select>
+            </div>
+            <div class="select-flex pl-3 d-flex">
+              <div>
+                <label for="title" class="form-label">Сooking time</label>
+                <input type="text" class="form-control" id="cookingTime" name="cooking-time">
+              </div>
+              <select id="typeOfTime" name="type-of-time" class="form-select ">
+                <option selected value="minutes">Minutes</option>
+                <option value="hours">Hours</option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="lead" class="form-label">Ingredients</label>
+            <textarea class="form-control" id="lead" rows="3" name="ingredients"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="content" class="form-label">Preparation mode</label>
+            <textarea class="form-control" id="content" rows="6" name="preparation"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="author" class="form-label">Author</label>
+            <input type="text" class="form-control" id="author" name="author">
+          </div>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-3">
+        <div class="island" style="min-height: 500px" id="posts">
+
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="island" style="min-height: 500px">
+          <div class="island__item" id="post">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
+
+<div class="island__item">
+  <h4></h4>
+  <div class="text-mited"><time></time></div>
+</div>
