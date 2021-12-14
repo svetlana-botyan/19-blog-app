@@ -8,33 +8,35 @@ class Recipes {
   init () {
     this.render()
 
-    this.handlePostsNeedsRender = this.handlePostsNeedsRender.bind(this)
+    this.handleRecipesNeedsRender = this.handleRecipesNeedsRender.bind(this)
 
-    window.addEventListener('posts:needsRender', this.handlePostsNeedsRender)
+    window.addEventListener('recipes:needsRender', this.handleRecipesNeedsRender)
   }
 
-  handlePostsNeedsRender () {
+  handleRecipesNeedsRender () {
     this.render()
   }
 
-  getTemplatePost ({ title, createdAt }) {
+  getTemplateRecipe ({ title, category, cookingTime, typeTime }) {
     return `
       <div class="island__item">
-        <h6>${title}</h6>
-        <div class="text-mited"><time>${createdAt}</time></div>
+        <h2>${title}</h2>
+        <div class="text-mited"><time>${category}</time></div>
+        <div class="text-mited "><svg class="pe-none align-baseline" width="14" height="14">
+        <use href="#clock" /></svg> ${cookingTime} ${typeTime}</div>
       </div>
     `
   }
 
-  createPosts (posts) {
-    const result = posts.map((post) => {
-      return this.getTemplatePost(post)
+  createRecipes (recipes) {
+    const result = recipes.map((recipe) => {
+      return this.getTemplateRecipe(recipe)
     })
 
     return result.join(' ')
   }
 
-  getPosts () {
+  getRecipes () {
     return new Promise((resolve, reject) => {
       fetch('/api/posts')
         .then((response) => response.json())
@@ -44,11 +46,11 @@ class Recipes {
   }
 
   render () {
-    this.getPosts()
-      .then(posts => {
-        const postsHTML = this.createPosts(posts)
+    this.getRecipes()
+      .then(recipes => {
+        const recipesHTML = this.createRecipes(recipes)
 
-        this.containerElement.innerHTML = postsHTML
+        this.containerElement.innerHTML = recipesHTML
       })
   }
 }

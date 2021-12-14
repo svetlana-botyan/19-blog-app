@@ -1,34 +1,36 @@
-$component: 'island';
+$component: "island";
 
 .#{$component} {
   border-radius: 1rem;
   background-color: white;
 
-
-
   &__item {
     padding: 0.5rem 1rem;
 
-
-
     & + & {
       border-top: 1px solid rgb(224, 224, 224);
-
     }
   }
 }
 
-.description{
+.description {
   background-image: url(../images/dish.jpg);
   background-size: cover;
 }
 
 h1 {
-  color: RGB(200, 6, 32)
+  color: RGB(200, 6, 32);
 }
 
-.book{
+h2{
+  font-size: 30px;
+}
+
+.icon {
   max-width: 40px;
   margin-right: 8px;
 }
 
+#clock{
+  color: RGB(200, 6, 32);
+}

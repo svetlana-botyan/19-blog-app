@@ -35,6 +35,7 @@ class Form {
   // отправка на сервер
   sendRecipe (data) {
     const dataJson = JSON.stringify(data)
+
     const opts = {
       method: 'POST',
       headers: {
@@ -46,9 +47,8 @@ class Form {
     fetch('/api/posts', opts)
       .then((response) => response.json())
       .then((data) => {
-        console.log('jr')
-        // const event = new Event('recipes:needsRender')
-        // window.dispatchEvent(event)
+        const event = new Event('recipes:needsRender')
+        window.dispatchEvent(event)
       })
   }
 }

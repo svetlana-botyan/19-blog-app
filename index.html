@@ -7,14 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cookbook</title>
   <!-- app.bundle.js подключается именно так, работает благодаря настройкам сервера -->
-  <script src="./dist/app.bundle.js" defer></script>
+  <script src="/app.bundle.js" defer></script>
 </head>
 
 <body>
-  <div class="container w-75">
+  <div class="container w-70">
     <div class="island mb-4">
       <div class="island__item d-flex justify-content-center align-items-baseline">
-        <img class="book" src="./src/images/book.svg" alt="book">
+        <img class="icon" src="file:///E:/Myfreedom/JS/git/19-blog-app/src/images/icon.png" alt="icon">
+        <img class="icon" src="/19-blog-app/src/images/icon.png" alt="icon">
         <h1 class="text-center ">Create recipe</h1>
       </div>
       <div class="island__item">
@@ -24,8 +25,8 @@
             <input type="text" class="form-control" id="title" name="title">
           </div>
           <div class="mb-3 d-flex justify-content-between align-items-start">
-            <div class="select-flex flex-grow-1">
-              <p>Choose a category</p>
+            <div class="select-flex col-6">
+              <label for="title" class="form-label">Choose a category</label>
               <select id="priority" name="category" class="form-select">
                 <option selected value="starter">Starter</option>
                 <option value="salad">Salad</option>
@@ -33,15 +34,18 @@
                 <option value="dessert">Dessert</option>
               </select>
             </div>
-            <div class="select-flex d-flex">
-              <div>
+            <div class="select-flex d-flex flex-grow-1 ms-3">
+              <div class="">
                 <label for="title" class="form-label">Сooking time</label>
-                <input type="text" class="form-control" id="cookingTime" name="cooking-time">
+                <input type="text" class="form-control" id="cookingTime" name="cookingTime">
               </div>
-              <select id="typeOfTime" name="typeTime" class="form-select ">
-                <option selected value="min">min</option>
-                <option value="hour">h</option>
-              </select>
+              <div class="">
+                <label for="title" class="form-label">Unit of time </label>
+                <select id="typeOfTime" name="typeTime" class="form-select flex-grow-1">
+                  <option selected value="min">min</option>
+                  <option value="hour">h</option>
+                </select>
+              </div>
             </div>
           </div>
           <div class="mb-3">
@@ -62,26 +66,26 @@
     </div>
 
     <div class="row">
-      <div class="col-3">
+      <div class="col-4">
         <div class="island" style="min-height: 500px" id="recipes">
-
         </div>
       </div>
 
-      <div class="col-9 ">
+      <div class="col-8 ">
         <div class="island description" style="min-height: 500px">
           <div class="island__item" id="recipe">
-
           </div>
         </div>
       </div>
     </div>
   </div>
+  <svg class="d-none" width="0" height="0" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="clock" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+      <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+      <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
+    </symbol>
+  </svg>
+
 </body>
 
 </html>
-
-<div class="island__item">
-  <h4></h4>
-  <div class="text-mited"><time></time></div>
-</div>
