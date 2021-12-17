@@ -14,7 +14,7 @@
   <div class="container w-70">
     <div class="island mb-4">
       <div class="island__item d-flex justify-content-center align-items-baseline">
-        <img class="icon" src="icon.png" alt="icon">
+        <img class="icon" src="icon.svg" alt="icon">
         <h1 class="text-center ">Create recipe</h1>
       </div>
       <div class="island__item">
@@ -31,6 +31,7 @@
                 <option value="salad">Salad</option>
                 <option value="main-dish">Main dish</option>
                 <option value="dessert">Dessert</option>
+                <option value="drink">Drink</option>
               </select>
             </div>
             <div class="select-flex d-flex flex-grow-1 ms-3">
@@ -65,13 +66,24 @@
     </div>
 
     <div class="row">
-      <div class="col-4">
-        <div class="island" style="min-height: 500px" id="recipes">
+      <div class="col-4 ">
+        <div class="island list">
+          <div class="cookbook">
+            <img class="icon" src="icon2.svg" alt="icon">
+            <h2>My cookbook</h2>
+          </div>
+          <div class="list-recepies" id="recipes"></div>
+          <div class="trash">
+            <svg class="pe-none align-baseline pr-3" width="20" height="20" style="color: white; margin-right: 8px">
+              <use href="#trash" />
+            </svg>
+            <h2>Trash</h2>
+          </div>
         </div>
       </div>
 
       <div class="col-8 ">
-        <div class="island description" style="min-height: 500px">
+        <div class="island description" style="min-height: 600px">
           <div class="island__item" id="recipe">
           </div>
         </div>
@@ -79,6 +91,13 @@
     </div>
   </div>
   <svg class="d-none" width="0" height="0" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="trash" fill="currentColor" viewBox="0 0 16 16">
+      <path
+        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+      <path fill-rule="evenodd"
+        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+    </symbol>
+
     <symbol id="clock" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
       <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
       <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />

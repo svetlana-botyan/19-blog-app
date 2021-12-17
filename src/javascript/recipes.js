@@ -20,7 +20,7 @@ class Recipes {
   getTemplateRecipe ({ title, category, cookingTime, typeTime }) {
     return `
       <div class="island__item">
-        <h2>${title}</h2>
+        <h3>${title}</h3>
         <div class="text-mited"><time>${category}</time></div>
         <div class="text-mited "><svg class="pe-none align-baseline" width="14" height="14">
         <use href="#clock" /></svg> ${cookingTime} ${typeTime}</div>
@@ -36,22 +36,19 @@ class Recipes {
     return result.join(' ')
   }
 
-  getRecipes () {
-    return new Promise((resolve, reject) => {
-      fetch('/api/posts')
-        .then((response) => response.json())
-        .then((data) => resolve(data.list))
-        .catch((error) => reject(error))
-    })
+  async getRecipes () {
+    const responce = await fetch('/api/posts')
+    const data = await responce.json()
+
+    // console.log(data.list)
+    return data.list
   }
 
-  render () {
-    this.getRecipes()
-      .then(recipes => {
-        const recipesHTML = this.createRecipes(recipes)
+  async render () {
+    const recipes = await this.getRecipes()
 
-        this.containerElement.innerHTML = recipesHTML
-      })
+    const recipesHTML = this.createRecipes(recipes)
+    this.containerElement.innerHTML = recipesHTML
   }
 }
 

@@ -33,7 +33,7 @@ class Form {
   }
 
   // отправка на сервер
-  sendRecipe (data) {
+  async sendRecipe (data) {
     const dataJson = JSON.stringify(data)
 
     const opts = {
@@ -44,12 +44,11 @@ class Form {
       body: dataJson
     }
 
-    fetch('/api/posts', opts)
-      .then((response) => response.json())
-      .then((data) => {
-        const event = new Event('recipes:needsRender')
-        window.dispatchEvent(event)
-      })
+    const response = await fetch('/api/posts', opts)
+    // const data = await response.json()
+
+    const event = new Event('recipes:needsRender')
+    window.dispatchEvent(event)
   }
 }
 
