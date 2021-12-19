@@ -5,7 +5,13 @@ $component: "island";
   background-color: white;
 
   &__item {
+    position: relative;
     padding: 0.5rem 1rem;
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
 
     & + & {
       border-top: 1px solid rgb(224, 224, 224);
@@ -36,6 +42,21 @@ $component: "island";
   .list-recepies {
     overflow-y: scroll;
     flex-grow: 1;
+
+    .island__item:hover {
+      background-color: #dc35462f;
+    }
+
+    a.active::after {
+      background-color: #f8d68c60;
+    }
+  }
+
+  .block-recipe{
+    display: flex;
+    overflow-y: scroll;
+    flex-grow: 1;
+
   }
 
   h2 {
@@ -55,7 +76,18 @@ $component: "island";
 
 .description {
   background-image: url(../images/dish.jpg);
-  background-size: cover;
+   background-size: cover;
+
+   .content{
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    overflow-y: scroll;
+    flex-grow: 1;
+   }
+   span{
+     font-weight: bold;
+   }
 }
 
 h1 {
