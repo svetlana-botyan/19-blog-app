@@ -15,4 +15,4 @@ const containerElement = document.querySelector('.description')
 
 const form = new Form(formElement)
 const recipes = new Recipes(recipesElement)
-const recipe = new Recipe(recipeElement, containerElement)
+const recipe = new Recipe(recipeElement, containerElement, recipesElement)

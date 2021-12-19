@@ -1,7 +1,8 @@
 class Recipe {
-  constructor (containerElement, mainContainerElement) {
+  constructor (containerElement, mainContainerElement, recipesElement) {
     this.containerElement = containerElement
     this.mainContainerElement = mainContainerElement
+    this.recipesElement = recipesElement
 
     this.init()
   }
@@ -119,9 +120,13 @@ class Recipe {
   }
 
   handleClickClose ({ target }) {
+    console.log({ target })
     if (target.dataset.role === 'close') {
       this.containerElement.innerHTML = ''
       this.installBackground()
+
+      const link = this.recipesElement.querySelector('.active')
+      link.classList.remove('active')
     }
   }
 }
