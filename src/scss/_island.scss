@@ -78,16 +78,23 @@ $component: "island";
   background-image: url(../images/dish.jpg);
    background-size: cover;
 
+   .block-recipe{
+     display: flex;
+     height: 540px;
+
+
    .content{
     display: flex;
     flex-direction: column;
-    height: 500px;
     overflow-y: scroll;
     flex-grow: 1;
    }
    span{
      font-weight: bold;
    }
+
+   }
+
 }
 
 h1 {

@@ -46,6 +46,8 @@ class Recipe {
   }
 
   getTemplateRecipe (recipe) {
+    const date = new Date(recipe.createdAt)
+
     return ` <div class="">
           <div class= "d-flex justify-content-end">
             <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Edit">
@@ -69,13 +71,15 @@ class Recipe {
           <h2>${recipe.title}</h2>
 
           <div class="content">
-            <p><span>Category:</span>${recipe.category}</p>
+            <p><span>Category: </span>${recipe.category}</p>
             <p><span>Сooking time:
                 </span>${recipe.cookingTime} ${recipe.typeTime}</p>
-            <p><span>Ingredients:</span>${recipe.ingredients}</p>
-            <p><span>Preparation mode:</span>${recipe.preparation}</p>
-            <p class="text-muted"><span>Author:</span>${recipe.author}</p>
-              <p class="text-muted"><span>Date of creation:</span>${recipe.cookingTime}</p>
+            <p><span>Ingredients: </span>${recipe.ingredients}</p>
+            <p><span>Preparation mode: </span>${recipe.preparation}</p>
+            <p class="text-muted"><span>Author: </span>${recipe.author}</p>
+              <p class="text-muted"><span>Date of creation:</span>
+              ${date.getDate()}.${date.getMonth()}.${date.getFullYear()}
+               </p>
               </div>
         </div>
   </div>

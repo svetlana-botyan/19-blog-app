@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import '../scss/app.scss'
+import bootstrap from 'bootstrap'
 
 // import { Modal } from 'bootstrap' //для модального окна
 
