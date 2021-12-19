@@ -103,6 +103,7 @@ class Recipe {
       await this.removeRecipe(id)
 
       this.containerElement.innerHTML = ''
+      this.installBackground()
 
       const event = new Event('recipes:needsRender')
       window.dispatchEvent(event)
