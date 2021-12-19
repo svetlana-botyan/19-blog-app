@@ -52,11 +52,10 @@ $component: "island";
     }
   }
 
-  .block-recipe{
+  .block-recipe {
     display: flex;
     overflow-y: scroll;
     flex-grow: 1;
-
   }
 
   h2 {
@@ -76,25 +75,23 @@ $component: "island";
 
 .description {
   background-image: url(../images/dish.jpg);
-   background-size: cover;
+  background-size: cover;
 
-   .block-recipe{
-     display: flex;
-     height: 540px;
-
-
-   .content{
+  .block-recipe {
     display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-    flex-grow: 1;
-   }
-   span{
-     font-weight: bold;
-   }
+    height: 520px;
 
-   }
+    .content {
+      display: flex;
+      flex-direction: column;
+      overflow-y: scroll;
+      flex-grow: 1;
+    }
 
+    span {
+      font-weight: bold;
+    }
+  }
 }
 
 h1 {
