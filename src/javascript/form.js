@@ -1,26 +1,34 @@
 import { nanoid } from 'nanoid'
+import { Modal } from 'bootstrap'
+import { resetForm } from './helpers'
 
 class Form {
-  constructor (formElement) {
+  constructor (formElement, buttonCreateRecipe, modalElement) {
     this.formElement = formElement
+    this.buttonCreateRecipe = buttonCreateRecipe
+    this.modalElement = modalElement
 
     this.init()
   }
 
   init () {
+    this.instanceModal = Modal.getOrCreateInstance(this.modalElement)
+
     this.handleSubmitForm = this.handleSubmitForm.bind(this)
+    this.handleClickButtonCreate = this.handleClickButtonCreate.bind(this)
+    this.handleFormSetEdit = this.handleFormSetEdit.bind(this)
 
     this.formElement.addEventListener('submit', this.handleSubmitForm)
+    this.buttonCreateRecipe.addEventListener('click', this.handleClickButtonCreate)
+    window.addEventListener('form:setEdit', this.handleFormSetEdit)
   }
 
-  handleSubmitForm (event) {
+  async handleSubmitForm (event) {
     event.preventDefault()
 
     const recipe = {
-      id: nanoid(), // Generate unique id
-      createdAt: new Date() // when create recipe
+      setTrash: null
     }
-    console.log(recipe)
 
     const formData = new FormData(this.formElement)
 
@@ -28,24 +36,67 @@ class Form {
       recipe[name] = value
     }
 
-    this.sendRecipe(recipe)
-    this.formElement.reset()
+    if (!recipe.id) recipe.id = nanoid() // Generate unique id
+    if (!recipe.createdAt) recipe.createdAt = new Date() // Data of creating
+
+    await this.sendRecipe(recipe)
+    resetForm(this.formElement)
+
+    this.instanceModal.hide()
+
+    const customEvent = new Event('recipe:clear')
+    window.dispatchEvent(customEvent)
+  }
+
+  handleClickButtonCreate () {
+    resetForm(this.formElement)
+    this.setFormCreateRecipe()
+    this.instanceModal.show()
+  }
+
+  handleFormSetEdit ({ detail }) {
+    const { data } = detail
+
+    this.setFormEditRecipe()
+    this.instanceModal.show()
+
+    for (const prop in data) {
+      const fieldElement = document.querySelector(`[name="${prop}"]`)
+      // querySelector вернет null если не найдется поля
+      if (fieldElement) {
+        fieldElement.value = data[prop]
+      }
+    }
+  }
+
+  setFormCreateRecipe () {
+    this.formElement.method = 'POST'
+  }
+
+  setFormEditRecipe () {
+    this.formElement.method = 'PUT'
   }
 
   // отправка на сервер
   async sendRecipe (data) {
     const dataJson = JSON.stringify(data)
+    const method = this.formElement.getAttribute('method')
+
+    let url = '/api/posts'
+
+    if (method === 'PUT') {
+      url += `/${data.id}`
+    }
 
     const opts = {
-      method: 'POST',
+      method,
       headers: {
         'Content-Type': 'application/json'
       },
       body: dataJson
     }
 
-    const response = await fetch('/api/posts', opts)
-    // const data = await response.json()
+    await fetch(url, opts)
 
     const event = new Event('recipes:needsRender')
     window.dispatchEvent(event)

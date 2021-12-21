@@ -50,7 +50,7 @@ class Recipes {
   getTemplateRecipe ({ title, category, cookingTime, typeTime, id }) {
     return `
       <div class="island__item">
-          <h3><a href="#${id}" id="${id}" class="stretched-link">${title}</a></h3>
+          <h3 class="mb-0"><a href="#${id}" id="${id}" class="stretched-link">${title}</a></h3>
           <div ><time>${category}</time></div>
           <div ><svg class="pe-none align-baseline" width="14" height="14">
           <use href="#clock" /></svg> ${cookingTime} ${typeTime}</div>
@@ -58,7 +58,9 @@ class Recipes {
     `
   }
 
-  createRecipes (recipes) {
+  createRecipes (array) {
+    const recipes = array.filter((array) => !array.setTrash)
+
     const result = recipes.map((recipe) => {
       return this.getTemplateRecipe(recipe)
     })

@@ -8,11 +8,6 @@ $component: "island";
     position: relative;
     padding: 0.5rem 1rem;
 
-    a {
-      text-decoration: none;
-      color: black;
-    }
-
     & + & {
       border-top: 1px solid rgb(224, 224, 224);
     }
@@ -47,6 +42,11 @@ $component: "island";
       background-color: #dc35462f;
     }
 
+    a {
+      text-decoration: none;
+      color: black;
+    }
+
     a.active::after {
       background-color: #f8d68c60;
     }
@@ -70,6 +70,7 @@ $component: "island";
 
   .trash {
     border-radius: 0 0 1rem 1rem;
+    cursor: pointer;
   }
 }
 
@@ -80,6 +81,10 @@ $component: "island";
   .block-recipe {
     display: flex;
     height: 520px;
+
+    h2{
+      word-break: break-word;
+    }
 
     .content {
       display: flex;

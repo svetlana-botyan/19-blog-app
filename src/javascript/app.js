@@ -7,12 +7,24 @@ import bootstrap from 'bootstrap'
 import { Form } from './form'
 import { Recipes } from './recipes'
 import { Recipe } from './recipe'
+import { Trash } from './trash'
+export { Trash } from './trash'
 
 const formElement = document.querySelector('#form')
+const buttonCreateRecipe = document.querySelector('#buttonCreateRecipe')
+const modalElement = document.querySelector('#formModal')
+
 const recipesElement = document.querySelector('#recipes')
 const recipeElement = document.querySelector('#recipe')
 const containerElement = document.querySelector('.description')
 
-const form = new Form(formElement)
+const trashElement = document.querySelector('.trash')
+
+const form = new Form(formElement, buttonCreateRecipe, modalElement)
 const recipes = new Recipes(recipesElement)
-const recipe = new Recipe(recipeElement, containerElement, recipesElement)
+const recipe = new Recipe(recipeElement,
+  containerElement,
+  recipesElement,
+  modalElement)
+
+const trash = new Trash(trashElement, recipeElement, containerElement)
