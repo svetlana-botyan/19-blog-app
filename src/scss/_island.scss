@@ -9,7 +9,7 @@ $component: "island";
     padding: 0.5rem 1rem;
 
     & + & {
-      border-top: 1px solid rgb(224, 224, 224);
+      border-top: 1px solid rgb(215, 217, 235);
     }
   }
 }
@@ -18,7 +18,7 @@ $component: "island";
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 600px;
+  height: 80vh;
 
   .cookbook,
   .trash {
@@ -48,7 +48,7 @@ $component: "island";
     }
 
     a.active::after {
-      background-color: #f8d68c60;
+      background-color: #faf76460;
     }
   }
 
@@ -77,35 +77,52 @@ $component: "island";
 .description {
   background-image: url(../images/dish.jpg);
   background-size: cover;
+  background-position: center;
 
   .block-recipe {
     display: flex;
-    height: 520px;
+    height: 70vh;
 
-    h2{
+    h2 {
       word-break: break-word;
     }
 
     .content {
       display: flex;
       flex-direction: column;
+      padding: 0 10px;
       overflow-y: scroll;
       flex-grow: 1;
+
+      img {
+        border-radius: 0.5rem;
+        margin-bottom: 15px;
+      }
     }
 
     span {
       font-weight: bold;
     }
   }
-}
 
-h1 {
-  color: RGB(220, 53, 69);
+  #recipeTrash{
+    overflow-y: scroll;
+    flex-grow: 1;
+    height: 65vh;
+  }
+
+  .trash__item{
+    border-bottom: 1px solid rgb(215, 217, 235);
+    }
 }
 
 .icon {
   max-width: 40px;
   margin-right: 8px;
+}
+
+.main-button {
+  border-radius: 0.5rem;
 }
 
 #clock {

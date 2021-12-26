@@ -1,5 +1,6 @@
 import { marked } from 'marked'
 import { Modal } from 'bootstrap'
+import { removeBackground, installBackground } from './helpers'
 
 class Recipe {
   constructor (containerElement, mainContainerElement, recipesElement, modalElement) {
@@ -19,9 +20,11 @@ class Recipe {
     this.handleClickClose = this.handleClickClose.bind(this)
     this.handleClickEdit = this.handleClickEdit.bind(this)
     this.handleRecipeClear = this.handleRecipeClear.bind(this)
+    this.handleRecipeRecover = this.handleRecipeRecover.bind(this)
 
     window.addEventListener('recipe:click', this.handleClickRecipe)
     window.addEventListener('recipe:clear', this.handleRecipeClear)
+    window.addEventListener('recipe:recover', this.handleRecipeRecover)
     this.containerElement.addEventListener('click', this.handleClickDelete)
     this.containerElement.addEventListener('click', this.handleClickClose)
     this.containerElement.addEventListener('click', this.handleClickEdit)
@@ -31,19 +34,11 @@ class Recipe {
     // console.log(detail.id)
     const { id } = detail
 
-    this.removeBackground()
+    removeBackground(this.mainContainerElement)
 
     const data = await this.getRecipe(id) // получаем данные recipe
 
     this.render(data)
-  }
-
-  removeBackground () {
-    this.mainContainerElement.style.backgroundImage = 'none'
-  }
-
-  installBackground () {
-    this.mainContainerElement.style.backgroundImage = 'url(dish.jpg)'
   }
 
   async getRecipe (id) {
@@ -61,39 +56,40 @@ class Recipe {
     const htmlIngredients = marked.parse(recipe.ingredients)
     const htmlPreparation = marked.parse(recipe.preparation)
 
-    return ` <div class="">
+    return ` <div class="p-2">
           <div class= "d-flex justify-content-end">
-            <button type="button" class="btn btn-success" data-toggle="tooltip" data-id = "${recipe.id}" data-role ="edit" data-placement="top" title="Edit">
-              <svg class="pe-none align-baseline pr-3" width="20" height="20" >
-                <use href="#edit-pencil" />
+            <button type="button" class="btn btn-success my-0" data-toggle="tooltip" data-id = "${recipe.id}" data-role ="edit" data-placement="top" title="Edit">
+              <svg class="pe-none align-center" width="23" height="23" >
+                <use  href="#edit-pencil" />
               </svg>
             </button>
             <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" data-id = "${recipe.id}" data-role ="setTrash" title="Add to trash">
-              <svg class="pe-none align-baseline pr-3" width="20" height="20" >
+              <svg class="pe-none align-center" width="23" height="23" >
                 <use href="#trash" />
               </svg>
             </button>
             <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" data-role ="close" title="Close">
-              <svg class="pe-none align-baseline pr-3" width="20" height="20" >
+              <svg class="pe-none align-basiline" width="30" height="30" >
                 <use href="#close" />
               </svg>
             </button>
           </div>
 
-          <div class="block-recipe d-flex flex-column">
-          <h2>${recipe.title}</h2>
+        <div class="block-recipe d-flex flex-column">
+            <h2 class="text-center my-2">${recipe.title}</h2>
 
           <div class="content">
             <p><span>Category: </span>${recipe.category}</p>
             <p><span>Сooking time:
-                </span>${recipe.cookingTime} ${recipe.typeTime}</p>
+            </span>${recipe.cookingTime} ${recipe.typeTime}</p>
+            <img src="${recipe.photo}" alt="photo">
             <p><span>Ingredients: </span>${htmlIngredients}</p>
             <p><span>Preparation mode: </span>${htmlPreparation}</p>
             <p class="text-muted"><span>Author: </span>${recipe.author}</p>
-              <p class="text-muted"><span>Date of creation:</span>
+            <p class="text-muted"><span>Date of creation:</span>
               ${date.getDate()}.${date.getMonth()}.${date.getFullYear()}
                </p>
-              </div>
+          </div>
         </div>
   </div>
     `
@@ -101,7 +97,7 @@ class Recipe {
 
   handleRecipeClear () {
     this.clear()
-    this.installBackground()
+    installBackground(this.mainContainerElement)
   }
 
   async render (data) {
@@ -113,11 +109,6 @@ class Recipe {
     if (target.dataset.role === 'setTrash') {
       const { id } = target.dataset
 
-      // const isRemove = confirm('Do you want to delete recipe?')
-
-      // if (!isRemove) return
-
-      // await this.removeRecipe(id)
       const data = await this.getRecipe(id)
       data.setTrash = 'yes'
       // console.log(data)
@@ -125,7 +116,7 @@ class Recipe {
       await this.sendTrashRecipe(data, id)
 
       this.containerElement.innerHTML = ''
-      this.installBackground()
+      installBackground(this.mainContainerElement)
 
       const event = new Event('recipes:needsRender')
       window.dispatchEvent(event)
@@ -147,25 +138,28 @@ class Recipe {
     await fetch(url, opts)
   }
 
-  // удаление из базы
-  // async removeRecipe (id) {
-  //   const url = `/api/posts/${id}` // от backend
+  async handleRecipeRecover ({ detail }) {
+    const { id } = detail
 
-  //   const responce = await fetch(url, { method: 'DELETE' })
-  //   const recipe = await responce.json()
+    const data = await this.getRecipe(id)
 
-  //   return recipe
-  // }
+    data.setTrash = null
+
+    await this.sendTrashRecipe(data, id)
+
+    const event = new Event('recipes:needsRender')
+    window.dispatchEvent(event)
+  }
 
   handleClickClose ({ target }) {
     // console.log({ target })
 
     if (target.dataset.role === 'close') {
       this.containerElement.innerHTML = ''
-      this.installBackground()
+      installBackground(this.mainContainerElement)
 
       const link = this.recipesElement.querySelector('.active')
-      link.classList.remove('active')
+      link.classList.remove('.active')
     }
   }
 

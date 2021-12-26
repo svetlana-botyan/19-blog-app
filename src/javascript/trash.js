@@ -1,3 +1,5 @@
+import { removeBackground, installBackground } from './helpers'
+
 class Trash {
   constructor (buttonElement, containerElement, mainContainerElement) {
     this.buttonElement = buttonElement
@@ -10,9 +12,11 @@ class Trash {
   init () {
     this.handleClickTrash = this.handleClickTrash.bind(this)
     this.handleClickDelete = this.handleClickDelete.bind(this)
+    this.handleClickRecover = this.handleClickRecover.bind(this)
 
     this.buttonElement.addEventListener('click', this.handleClickTrash)
     this.containerElement.addEventListener('click', this.handleClickDelete)
+    this.containerElement.addEventListener('click', this.handleClickRecover)
   }
 
   async handleClickTrash () {
@@ -22,10 +26,32 @@ class Trash {
   async renderTrash () {
     const recipes = await this.getRecipes()
 
-    this.removeBackground()
+    removeBackground(this.mainContainerElement)
+
+    const containerTrashHTML = this.getTemplateContainerTrash()
+    this.containerElement.innerHTML = containerTrashHTML
+
+    const boxRecipesElement = this.containerElement.querySelector('#recipeTrash')
 
     const recipesTrashHTML = this.createTrashRecipes(recipes)
-    this.containerElement.innerHTML = recipesTrashHTML
+    boxRecipesElement.innerHTML = recipesTrashHTML
+  }
+
+  getTemplateContainerTrash () {
+    return `
+    <div class= "d-flex flex-column">
+      <div class= "d-flex  justify-content-end">
+        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" data-role ="close" title="Close">
+         <svg class="pe-none align-basiline" width="30" height="30" >
+           <use href="#close" />
+         </svg>
+        </button>
+      </div>
+
+      <div id="recipeTrash">
+      </div>
+    </div>
+    `
   }
 
   async getRecipes () {
@@ -44,13 +70,18 @@ class Trash {
     return result.join(' ')
   }
 
-  getTemplateRecipe ({ title, category, id }) {
+  getTemplateRecipe ({ title, id }) {
     return `
-      <div class="d-flex flex-row w-70 justify-content-between trash__item">
+    <div class="p-2 trash__item">
+      <div class="d-flex flex-row justify-content-between">
           <h3 class="mb-0">${title}</h3>
-          <div ><time>${category}</time></div>
-          <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" data-id = "${id}" data-role ="delete" title="Delete">Del</button>
+          <div>
+            <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" data-id = "${id}" data-role ="recover" title="Delete">Recover</button>
+
+            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" data-id = "${id}" data-role ="delete" title="Delete">Delete</button>
+          </div>
       </div>
+    </div>
     `
   }
 
@@ -65,7 +96,7 @@ class Trash {
       await this.removeRecipe(id)
 
       this.containerElement.innerHTML = ''
-      this.installBackground()
+      installBackground(this.mainContainerElement)
     }
   }
 
@@ -79,12 +110,22 @@ class Trash {
     return recipe
   }
 
-  removeBackground () {
-    this.mainContainerElement.style.backgroundImage = 'none'
+  async handleClickRecover ({ target }) {
+    if (target.dataset.role === 'recover') {
+      const { id } = target.dataset
+
+      await this.recoverRecipe(id)
+
+      this.containerElement.innerHTML = ''
+      installBackground(this.mainContainerElement)
+    }
   }
 
-  installBackground () {
-    this.mainContainerElement.style.backgroundImage = 'url(dish.jpg)'
+  recoverRecipe (id) {
+    const event = new CustomEvent('recipe:recover', {
+      detail: { id }
+    })
+    window.dispatchEvent(event)
   }
 }
 

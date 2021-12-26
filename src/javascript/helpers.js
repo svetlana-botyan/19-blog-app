@@ -5,4 +5,12 @@ function resetForm (formElement) {
   inputHiddenElements.forEach(inputElement => { inputElement.value = '' })
 }
 
-export { resetForm }
+function removeBackground (containerElement) {
+  containerElement.style.backgroundImage = 'none'
+}
+
+function installBackground (containerElement) {
+  containerElement.style.backgroundImage = 'url(dish.jpg)'
+}
+
+export { resetForm, removeBackground, installBackground }

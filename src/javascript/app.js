@@ -8,7 +8,6 @@ import { Form } from './form'
 import { Recipes } from './recipes'
 import { Recipe } from './recipe'
 import { Trash } from './trash'
-export { Trash } from './trash'
 
 const formElement = document.querySelector('#form')
 const buttonCreateRecipe = document.querySelector('#buttonCreateRecipe')

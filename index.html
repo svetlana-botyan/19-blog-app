@@ -14,17 +14,14 @@
   <div class="container w-70">
     <div class="island my-3">
       <div class="island__item d-flex justify-content-center align-items-center">
-        <div class="d-flex justify-content-center align-items-baseline">
-          <h1 class="text-center mb-0">Create recipe</h1>
-        </div>
-        <button type="button" class="btn btn-danger" id="buttonCreateRecipe">
-          +
+        <button type="button" class="btn btn-outline-danger main-button" id="buttonCreateRecipe">
+          <h1>Create recipe +</h1>
         </button>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-4 ">
+      <div class="col-4">
         <div class="island list">
           <div class="cookbook">
             <img class="icon" src="icon2.svg" alt="icon">
@@ -41,7 +38,7 @@
       </div>
 
       <div class="col-8 ">
-        <div class="island description" style="height: 600px">
+        <div class="island description" style="height: 80vh">
           <div class="island__item" id="recipe">
 
           </div>
@@ -59,7 +56,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form id="form" method="post">
+          <form novalide id="form" method="post">
             <input type="text" name="id" hidden>
             <input type="text" name="createdAt" hidden>
             <div class="mb-3">
@@ -90,6 +87,10 @@
                   </select>
                 </div>
               </div>
+            </div>
+            <div class="mb-3">
+              <label for="author" class="form-label">Photo (url)</label>
+              <input type="url" class="form-control" id="photo" name="photo">
             </div>
             <div class="mb-3">
               <label for="lead" class="form-label">Ingredients</label>

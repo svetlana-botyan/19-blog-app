@@ -78,6 +78,7 @@ class Recipes {
 
   async render () {
     const recipes = await this.getRecipes()
+    // console.log(recipes)
 
     const recipesHTML = this.createRecipes(recipes)
     this.containerElement.innerHTML = recipesHTML
