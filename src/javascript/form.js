@@ -24,26 +24,30 @@ class Form {
   }
 
   async handleSubmitForm (event) {
-    event.preventDefault()
+    if (!this.formElement.checkValidity()) {
+      event.preventDefault()
+      this.formElement.classList.add('was-validated')
+    } else {
+      event.preventDefault()
 
-    const recipe = {
-      setTrash: null
+      const recipe = {
+        setTrash: null
+      }
+
+      const formData = new FormData(this.formElement)
+
+      for (const [name, value] of formData.entries()) {
+        recipe[name] = value
+      }
+
+      if (!recipe.id) recipe.id = nanoid() // Generate unique id
+      if (!recipe.createdAt) recipe.createdAt = new Date() // Data of creating
+
+      await this.sendRecipe(recipe)
+      resetForm(this.formElement)
+
+      this.instanceModal.hide()
     }
-
-    const formData = new FormData(this.formElement)
-
-    for (const [name, value] of formData.entries()) {
-      recipe[name] = value
-    }
-
-    if (!recipe.id) recipe.id = nanoid() // Generate unique id
-    if (!recipe.createdAt) recipe.createdAt = new Date() // Data of creating
-
-    await this.sendRecipe(recipe)
-    resetForm(this.formElement)
-
-    this.instanceModal.hide()
-
     const customEvent = new Event('recipe:clear')
     window.dispatchEvent(customEvent)
   }
